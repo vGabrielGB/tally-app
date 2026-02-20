@@ -1,0 +1,336 @@
+/* ======================================== */
+/* ESTILOS DEL DASHBOARD DE ADMIN */
+/* ======================================== */
+
+/* 1. Reutilizamos el .welcome-section de style.css */
+/* (Asegúrate de haber movido esos estilos a style.css) */
+
+/* 2. El nuevo Grid Layout */
+.admin-dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Columna principal 2/3, sidebar 1/3 */
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.admin-main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.admin-sidebar-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* 3. Tarjetas de Resumen (KPIs) */
+.summary-card-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 tarjetas en fila */
+  gap: 1.5rem;
+}
+
+.summary-card {
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  border-left: 6px solid var(--accent-color);
+}
+.summary-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.summary-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.summary-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0.5rem 0;
+}
+.summary-value.text-danger {
+  color: #FF5252;
+}
+.summary-value.text-success {
+  color: #4CAF50;
+}
+
+.summary-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  text-decoration: none;
+}
+.summary-link:hover {
+  text-decoration: underline;
+}
+
+
+/* 4. Estilos del Gráfico (Movidos desde tu admin.css) */
+.estadistica-card {
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+
+  border-left: 6px solid var(--accent-color);
+}
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+.chart-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bar-chart {
+  width: 100%;
+  height: 250px; /* Un poco más alto para el dashboard */
+  max-width: 100%;
+  color: var(--text-primary);
+}
+
+
+/* 5. Tarjeta de Atajos Rápidos */
+.quick-actions-card {
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+}
+.quick-actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.quick-action-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--bg-primary);
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+.quick-action-btn:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+.quick-action-btn .arrow {
+  font-size: 1.5rem;
+  transition: transform 0.2s ease;
+}
+.quick-action-btn:hover .arrow {
+  transform: translateX(5px);
+}
+
+
+/* --- Media Queries --- */
+@media (max-width: 1024px) {
+  .admin-dashboard-grid {
+    grid-template-columns: 1fr; /* Apila las columnas */
+  }
+}
+
+@media (max-width: 768px) {
+  .summary-card-row {
+    grid-template-columns: 1fr; /* Apila las tarjetas de resumen */
+  }
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.card-kpi {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-left: 4px solid var(--accent-color);
+}
+
+.card-kpi .card-icon {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(63, 81, 181, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+}
+
+.kpi-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.kpi-sub {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+.kpi-sub.positive { color: #4CAF50; }
+.kpi-sub.neutral { color: var(--text-secondary); }
+.kpi-sub.negative { color: #FF5252; }
+
+/* Botón pequeño dentro de KPI */
+.btn-mini-action {
+  background: none; border: 1px solid var(--accent-color); color: var(--accent-color);
+  border-radius: 4px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;
+  margin-top: 0.5rem; transition: 0.2s;
+}
+.btn-mini-action:hover { background: var(--accent-color); color: white; }
+
+/* === ESTILOS DEL GRÁFICO UNIFICADO (BARRAS HTML) === */
+.chart-card {
+  height: auto;
+  min-height: 520px; /* Más alto para que las columnas tengan espacio */
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-bars-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  flex-grow: 1;
+  padding: 2.5rem 1.5rem 0 1.5rem;
+  /* Eliminada la línea inferior para aprovechar todo el alto */
+  height: 320px; /* Altura mayor para columnas más altas */
+  gap: 18px;
+}
+
+.chart-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  width: 18%; /* Columnas más anchas para nombres largos */
+  max-width: 120px; /* Limitar ancho máximo para pantallas grandes */
+  position: relative;
+}
+
+/* La barra gris de fondo (La Meta) */
+.chart-bar-bg {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.05); /* Gris sutil */
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden; /* Para que el relleno no se salga */
+  transition: height 1s ease;
+  min-height: 8px; /* Un poco más visible */
+  max-width: 120px; /* Coincide con la columna */
+}
+
+/* La barra de color (El Progreso) */
+.chart-bar-fill {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 8px;
+  transition: height 1s ease-out;
+}
+
+/* Etiquetas */
+.chart-label {
+  margin-top: 0.8rem;
+  font-size: 0.85rem; /* Texto un poco más grande */
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-align: center;
+  white-space: normal; /* Permite varias líneas si hace falta */
+  overflow: visible;
+  text-overflow: clip;
+  max-width: 120px;
+}
+
+.chart-value {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  font-weight: bold;
+
+  
+}
+
+/* --- ANIMACIONES DEL GRÁFICO --- */
+
+/* Contenedor de la barra gris (Fondo) */
+.chart-bar-bg {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.05); /* Gris muy sutil */
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    min-height: 4px;
+    /* La altura se define inline en el HTML, pero podemos animarla si queremos */
+}
+
+/* La barra de color (Relleno) */
+.chart-bar-fill {
+    width: 100%;
+    border-radius: 6px;
+    
+    /* Esta es la clave: Inicia en altura 0 y crece */
+    height: 0%; 
+    animation: growBar 1s ease-out forwards; 
+    /* 'forwards' mantiene el estado final (la altura real que ponemos inline) */
+}
+
+/* Definición de la animación */
+@keyframes growBar {
+    from { height: 0%; }
+    /* 'to' lo toma del estilo inline style="height: X%" que pusimos en JS */
+}
+
+/* Hover en las barras para que se sienta interactivo */
+.chart-bar-group {
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+.chart-bar-group:hover {
+    transform: translateY(-5px);
+}
+
+/* --- Ajustes de diseño tomados del dueño para el gráfico --- */
+/* Fondo de la "meta" más claro y bordes ligeramente más redondeados */
+.chart-bar-bg {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 8px !important;
+}
+
+/* Etiquetas: permitir saltos de línea y mostrar más texto si es necesario */
+.chart-label {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  max-width: 120px !important;
+}
+
+

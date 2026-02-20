@@ -1,0 +1,626 @@
+/* ======================================== */
+/* 1. LAYOUT PRINCIPAL DEL DASHBOARD */
+/* ======================================== */
+.dashboard-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Tu preferencia de espacio entre secciones */
+}
+
+/* Ajuste específico para pegar la welcome card a lo de abajo */
+.welcome-section {
+  margin-bottom: 0 !important;
+} 
+
+.dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 0 !important;
+}
+
+.dashboard-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+/* ======================================== */
+/* 2. SECCIÓN DE BIENVENIDA (Header) */
+/* ======================================== */
+
+/* --- Contenedor Flex para alinear Status + Botones en fila --- */
+.welcome-actions {
+  display: flex;
+  align-items: center; /* Centrado vertical perfecto */
+  gap: 1rem;           /* Espacio entre botones */
+  margin-top: 1.5rem;
+  flex-wrap: wrap;     /* Para que baje en pantallas muy pequeñas */
+}
+
+/* Tags de Estatus */
+.status-tag {
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  background-color: rgba(63, 81, 181, 0.1);
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  /* margin-right: 1rem;  <-- ELIMINADO (El gap del padre ya hace esto) */
+}
+
+.status-solvente {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+  border-color: #4CAF50;
+}
+.status-moroso {
+  background-color: rgba(255, 82, 82, 0.1);
+  color: #FF5252;
+  border-color: #FF5252;
+}
+.status-pendiente {
+  background-color: rgba(255, 179, 0, 0.1);
+  color: #FFB300;
+  border-color: #FFB300;
+}
+.status-revision {
+  background-color: rgba(255, 179, 0, 0.1);
+  color: #0059ff;
+  border-color: #0059ff;
+}
+
+/* Botón Historial */
+.history-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  /* margin-top: 1rem; <-- ELIMINADO (Rompía la alineación con el QR) */
+}
+
+.history-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Botón QR */
+.qr-btn {
+  background-color: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+.qr-btn:hover {
+  background-color: white;
+  color: var(--accent-color);
+  border-color: white;
+  transform: translateY(-2px);
+}
+
+.qr-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ======================================== */
+/* 3. TARJETAS (CARDS) GENERALES */
+/* ======================================== */
+.card {
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 0.5rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  gap: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon { flex-shrink: 0; }
+.card-icon svg { width: 64px; height: 64px; }
+.card-content { flex: 1; }
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.card-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.card-text-split {
+  display: flex;
+  align-items: baseline;
+  gap: 10rem;
+}
+
+.tasa-bcv {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.card-info { border-left: 6px solid var(--accent-color); }
+
+/* Card Racha (Streak) */
+.card-streak {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.streak-icon { margin: 1rem 0; }
+.streak-icon svg { width: 80px; height: 100px; }
+.streak-text { color: #ff6b35; font-size: 1rem; }
+.streak-text strong { font-weight: 700; }
+
+/* Card Puntualidad (Chart) */
+.punctuality-card .card-title {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.chart-container {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+}
+
+.pie-chart {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.chart-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.legend-text { color: var(--text-secondary); }
+
+
+/* ======================================== */
+/* 4. SIDEBAR DERECHO (Calendario/Reloj) */
+/* ======================================== */
+.sidebar-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.calendar-card, .timer-card {
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+}
+
+/* Calendario */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calendar-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.calendar-nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--accent-color);
+  transition: opacity 0.3s;
+}
+.calendar-nav-btn:hover { opacity: 0.7; }
+.calendar-nav-btn svg { width: 20px; height: 20px; }
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.weekday {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 0.25rem;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: var(--text-primary);
+}
+
+.calendar-day:hover { background-color: rgba(63, 81, 181, 0.1); }
+.calendar-day.prev-month { color: var(--calendar-prev); }
+.calendar-day.current-day {
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: 700;
+  border-radius: 100%;
+}
+
+/* Reloj / Timer */
+.timer-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.timer-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.timer-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.pay-btn {
+  background: linear-gradient(135deg, #7cb342 0%, #8bc34a 100%);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.pay-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 179, 66, 0.4);
+}
+
+.clock-display {
+  margin-top: 0.5rem;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clock-svg {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  color: var(--text-primary);
+}
+
+
+/* ======================================== */
+/* 5. MODALES (QR y Feedback) */
+/* ======================================== */
+
+/* Estilos Base del Overlay */
+.modal-qr { /* Nota: En HTML usas ID 'qrModal' con clase 'modal-overlay', esta clase debe coincidir */
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 3000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+}
+.modal-qr.active { display: flex; }
+
+/* Estilo Tarjeta Modal QR */
+#qrModal .modal-content {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 20px 50px rgba(63, 81, 181, 0.25);
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--bg-secondary, #fff);
+  max-width: 500px;
+}
+
+/* Encabezado QR */
+#qrModal .modal-header {
+  background-color: var(--bg-primary, #f5f5f7);
+  padding: 1.5rem;
+  border-left: 6px solid var(--accent-color);
+  border-bottom: 1px solid var(--border-color, #eee);
+  justify-content: center;
+  position: relative;
+}
+
+#qrModal .modal-title {
+  font-size: 1.3rem;
+  color: var(--accent-color, #3f51b5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Botón cerrar QR */
+#qrModal .close-modal-btn {
+  background-color: rgba(0,0,0,0.05);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 1rem;
+  right: 1rem;
+  color: #666;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+}
+#qrModal .close-modal-btn:hover {
+  background-color: #ff5252;
+  color: white;
+}
+
+/* Cuerpo QR */
+#qrModal .modal-body {
+  border-left: 6px solid var(--accent-color);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: radial-gradient(circle at center, rgba(63, 81, 181, 0.05) 0%, transparent 70%);
+}
+
+/* Ticket QR */
+.qr-display-container {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 2px solid var(--accent-color, #3f51b5); 
+  margin-bottom: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+.qr-display-container:hover { transform: scale(1.03); }
+.qr-display-container img { display: block; }
+
+/* Info QR */
+.qr-cedula {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary, #333);
+  letter-spacing: 1px;
+  background-color: var(--bg-primary, #eee);
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  margin-top: 0.5rem;
+}
+
+.qr-help-text {
+  color: var(--text-secondary, #777);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+
+/* ======================================== */
+/* 6. MEDIA QUERIES FINAL */
+/* ======================================== */
+@media (max-width: 1200px) {
+  .dashboard-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .sidebar-right {
+    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .history-btn, .qr-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .status-tag {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .sidebar-right {
+    grid-template-columns: 1fr;
+  }
+
+  /* 1. REORDENAMIENTO DEL NAVBAR */
+  .navbar-content {
+    /* Mantiene el flex, pero permite reordenar */
+    justify-content: space-between; 
+  }
+
+  /* El botón de hamburguesa (Toggler) pasa a la izquierda (Posición 1) */
+  #navbarToggler {
+    order: 1;
+    display: block; /* Aseguramos que se vea */
+  }
+
+  /* El Logo pasa al centro (Posición 2) */
+  .navbar-logo {
+    order: 2;
+    margin: 0 auto; /* Truco para empujarlo al centro visualmente */
+    /* Ajuste fino para que quede centrado real si los botones de los lados miden distinto */
+    transform: translateX(-10px); 
+  }
+
+  /* La Foto de Perfil pasa a la derecha (Posición 3) */
+  .navbar-profile {
+    order: 3;
+    margin-left: 0; /* Quitamos márgenes automáticos si los tenía */
+  }
+
+  /* 2. CARDS EN COLUMNA */
+  .dashboard-row {
+    /* Cambiamos de 2 columnas a 1 sola */
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+
+  /* Ajuste extra: Que el gráfico de torta no se vea gigante en móvil */
+  .chart-container {
+    flex-direction: column; /* Leyenda abajo del gráfico */
+    gap: 1.5rem;
+  }
+}
+
+/* --- DATOS BANCARIOS (DERECHA ARRIBA) --- */
+.bank-data-card {
+  border-top: 4px solid var(--accent-color);
+  /* CAMBIO: Altura Mínima Fija para evitar saltos */
+  min-height: 340px; 
+  display: flex;
+  flex-direction: column;
+}
+
+.bank-tabs { display: flex; background: var(--bg-primary); border-radius: 8px; padding: 0.3rem; margin-bottom: 1rem; }
+.bank-tab { flex: 1; border: none; background: none; padding: 0.5rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border-radius: 6px; transition: 0.2s; }
+.bank-tab.active { background: var(--bg-secondary); color: var(--accent-color); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+.bank-content { flex-grow: 1; } /* Ocupa el espacio */
+
+.bank-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 1px dashed var(--border-color); font-size: 0.9rem; }
+.bank-row:last-child { border-bottom: none; margin-bottom: 0; }
+.bank-val { font-weight: 600; color: var(--text-primary); text-align: right; }
+.bank-val.highlight { color: var(--accent-color); font-size: 1rem; }
+.bank-val.small-text { font-size: 0.8rem; }
+.btn-copy { background:none; border:1px solid var(--border-color); border-radius:4px; cursor:pointer; margin-left:0.5rem; }
+.btn-copy:hover { background: var(--accent-color); color: white; border-color: var(--accent-color); }
+
+/* SWITCH DE MONEDA (TOGGLE) */
+.currency-toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+}
+
+.currency-toggle input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  transition: .4s;
+  border-radius: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--text-secondary);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 3px;
+  background-color: var(--accent-color);
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Estado Activo (EUR) */
+input:checked + .slider:before {
+  transform: translateX(30px);
+  background-color: #ff9800; /* Naranja para Euro si quieres diferenciar, o accent-color */
+}
+
+/* INPUTS CALCULADORA FOCUS */
+.calc-input-group div:focus-within {
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+}

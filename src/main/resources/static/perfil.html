@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TALLY - Mi Perfil</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .profile-container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+        .profile-card { background: var(--bg-secondary); border-radius: 12px; padding: 2rem; box-shadow: var(--card-shadow); border: 1px solid var(--border-color); }
+        .profile-avatar-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem; position: relative; }
+        .avatar-large { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg-primary); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn-change-photo { position: absolute; bottom: 0; background: var(--accent-color); color: white; border: none; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .btn-change-photo:hover { transform: scale(1.05); }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-label { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); }
+        .form-input { padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); font-size: 1rem; outline: none; transition: 0.2s; }
+        .form-input:focus { border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.1); }
+        .form-input:disabled { opacity: 0.6; cursor: not-allowed; }
+        
+        .section-divider { border-top: 1px dashed var(--border-color); margin: 2rem 0; position: relative; }
+        .section-label { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg-secondary); padding: 0 1rem; color: var(--text-secondary); font-size: 0.85rem; }
+        
+        .btn-save { background: var(--accent-color); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%; transition: 0.2s; margin-top: 1rem; }
+        .btn-save:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-back { background: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); padding: 8px 16px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 1rem; font-size: 0.9rem; }
+        .btn-back:hover { border-color: var(--text-primary); color: var(--text-primary); }
+
+        /* ======================================== */
+/* ESTILOS DE MODALES (Overlay y Ventana) */
+/* ======================================== */
+
+/* 1. El fondo oscuro (Overlay) */
+.modal-overlay {
+    display: none; /* <--- ¡VITAL! Oculto por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo negro semitransparente */
+    z-index: 9999; /* Por encima de todo */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    backdrop-filter: blur(4px); /* Efecto borroso moderno */
+}
+
+/* 2. Clase para mostrarlo (JS la agrega) */
+.modal-overlay.active {
+    display: flex;
+}
+
+/* 3. La tarjeta del modal */
+.modal-content {
+    background-color: var(--bg-secondary); /* Respeta el modo oscuro */
+    color: var(--text-primary);
+    width: 90%;
+    max-width: 500px; /* Ancho máximo para el cropper */
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Animación de entrada suave */
+@keyframes modalPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* 4. Cabecera del Modal */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.close-modal-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1;
+}
+.close-modal-btn:hover {
+    color: var(--accent-color);
+}
+
+/* 5. Contenedor de la imagen para el Cropper */
+/* Importante: El cropper necesita un contenedor con altura definida */
+.modal-content > div:not(.modal-header):not(.modal-actions) {
+    height: 400px;
+    background-color: #333; /* Fondo oscuro para resaltar la foto */
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+/* Asegurar que la imagen dentro no se desborde antes de cargar el script */
+#imageToCrop {
+    display: block;
+    max-width: 100%;
+}
+
+        @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+    </style>
+    <script>
+      (function() {
+        if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+      })();
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+  </head>
+  <body>
+
+    <nav class="mobile-navbar">
+        <div class="mobile-nav-logo">TALLY</div>
+        <button class="mobile-nav-btn" id="themeToggle">
+            <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </nav>
+
+    <div class="app-layout" style="display: block;"> <main class="profile-container">
+            
+            <button class="btn-back" onclick="history.back()">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Volver
+            </button>
+
+            <form id="formPerfil" class="profile-card">
+                <div class="profile-avatar-section">
+                    <img src="../../../../uploads/perfil/default-profile.png" alt="Avatar" class="avatar-large" id="avatarPreview">
+                    <button type="button" class="btn-change-photo" onclick="document.getElementById('inputFoto').click()">Cambiar Foto</button>
+                    <input type="file" id="inputFoto" accept="image/*" style="display: none;">
+                    <h2 id="displayNombre" style="margin-top: 1rem; margin-bottom: 0;">Cargando...</h2>
+                    <span>...</span>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" id="inputNombre" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Apellido</label>
+                        <input type="text" id="inputApellido" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cédula (No editable)</label>
+                        <input type="text" id="inputCedula" class="form-input" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Teléfono</label>
+                        <input type="tel" id="inputTelefono" class="form-input" placeholder="0412-0000000">
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" id="inputEmail" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="section-divider">
+                    <span class="section-label">Seguridad</span>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Nueva Contraseña</label>
+                        <input type="password" id="inputPassword" class="form-input" placeholder="Dejar en blanco para no cambiar">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirmar Contraseña</label>
+                        <input type="password" id="inputConfirmPassword" class="form-input" placeholder="Repetir contraseña">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-save" id="btnGuardar">Guardar Cambios</button>
+            </form>
+            
+        </main>
+
+        
+    </div>
+<div class="modal-overlay" id="cropModal" style="z-index: 9999;">
+  <div class="modal-content" style="max-width: 500px; text-align: center;">
+    <div class="modal-header">
+      <h3 class="modal-title">Ajustar Foto de Perfil</h3>
+      <button class="close-modal-btn" id="closeCropModal">&times;</button>
+    </div>
+    
+    <div style="height: 400px; width: 100%; background: #333; margin-bottom: 1rem;">
+      <img id="imageToCrop" src="" style="max-width: 100%; display: block;">
+    </div>
+
+    <div class="modal-actions" style="display: flex; gap: 1rem; justify-content: center;">
+      <button type="button" class="btn-cancel" id="btnCancelCrop" style="background: #e0e0e0; color: #333; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">Cancelar</button>
+      <button type="button" class="btn-confirm" id="btnConfirmCrop" style="background: var(--accent-color); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">Guardar Foto</button>
+    </div>
+  </div>
+</div>
+    <script src="js/main.js"></script>
+    <script src="js/perfil.js"></script>
+  </body>
+</html>

@@ -1,0 +1,467 @@
+/* ======================================== */
+/* ESTILOS DE PÁGINAS DE GESTIÓN (Admin) */
+/* ======================================== */
+
+.gestion-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.gestion-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+.card-form {
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  
+}
+
+.form-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem; /* Aumentado para separar del form */
+}
+
+/* --- Formulario Compactado --- */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* CAMBIO: Reducido de 1rem */
+}
+
+.form-divider {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 1rem 0; /* CAMBIO: Reducido de 1.5rem */
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+.feedback-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+}
+.feedback-select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem; /* CAMBIO: Reducido de 1rem */
+}
+
+
+/* --- Layout de Gestión (Usado en ambas páginas) --- */
+.gestion-layout-grid {
+  display: grid;
+  /* CAMBIO: La columna derecha (formulario) ahora es 1.5 veces más ancha */
+  grid-template-columns: 1fr 1.5fr; 
+  gap: 2rem;
+}
+
+.gestion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.btn-new {
+  background: none;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+.btn-new:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+/* --- Estilos de Lista (Usados en ambas páginas) --- */
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-primary);
+  padding: 1rem;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+.list-item:hover {
+  border-color: var(--accent-color);
+  background-color: rgba(63, 81, 181, 0.05);
+}
+
+.item-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.item-detail {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.item-status-active {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+}
+.item-status-inactive {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+/* ======================================== */
+/* NUEVO: ESTILOS DE LISTA DE ESTUDIANTES */
+/* ======================================== */
+.list-search-container {
+  margin-bottom: 1.5rem;
+}
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: border-color 0.3s;
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.student-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+.student-list::-webkit-scrollbar {
+  width: 8px;
+}
+.student-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.student-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+.student-list::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ¡CORRECCIÓN! Estilos para los botones de icono */
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--text-secondary);
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+.btn-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.5;
+}
+.btn-icon:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+.btn-edit:hover {
+  color: var(--accent-color);
+}
+.btn-delete:hover {
+  color: #FF5252;
+}
+
+/* Layout Principal */
+.gestion-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.gestion-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    padding-left: 15px;
+}
+
+.gestion-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Lista izq, Formulario der (más ancho) */
+    gap: 2rem;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .gestion-layout-grid {
+        grid-template-columns: 1fr; /* Columna única en móviles */
+    }
+}
+
+/* Tarjetas */
+.card-form {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* Sombra suave */
+    border: 1px solid var(--border-color);
+    border-left: 6px solid var(--accent-color);
+    width: 600px;
+}
+
+.form-section-title {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+/* Formulario Grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Inputs Modernos */
+.form-input, .feedback-select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.form-input:focus, .feedback-select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+    outline: none;
+}
+
+/* Botón Premium */
+.btn-submit-feedback {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--accent-color), #5c6bc0);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 1rem;
+}
+
+.btn-submit-feedback:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(63, 81, 181, 0.3);
+}
+
+/* Lista de Estudiantes */
+.item-list {
+    max-height: 435px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--bg-primary);
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.list-item:hover {
+    border-color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+.item-name {
+    font-weight: bold;
+    display: block;
+    color: var(--text-primary);
+}
+
+.item-detail {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.btn-icon:hover {
+    background: rgba(0,0,0,0.05);
+    color: var(--accent-color);
+}
+
+.btn-delete:hover {
+    color: #f44336;
+    background: rgba(244, 67, 54, 0.1);
+}
+
+/* Lista de Estudiantes - Estilos Nuevos */
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px; /* Un poco más de espacio */
+    border-radius: 12px;
+    background: var(--bg-primary);
+    margin-bottom: 12px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.item-left {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espacio entre foto y texto */
+}
+
+/* Avatar circular para la foto */
+.student-avatar-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+}
+
+/* Avatar placeholder (iniciales) */
+.student-avatar-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.item-detail {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.item-sub-detail {
+    font-size: 0.75rem;
+    color: #888; /* Color suave para la extensión */
+}
+
+/* Efecto desactivado (definido en linea en JS, pero reforzamos aquí) */
+.list-item[style*="opacity"] {
+    background-color: #f9f9f9; /* Fondo grisáceo si está inactivo */
+}

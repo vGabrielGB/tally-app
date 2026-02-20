@@ -1,0 +1,693 @@
+/* ======================================== */
+/* 1. VARIABLES Y RESET                     */
+/* ======================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* MODO CLARO */
+  --bg-primary: #f5f5f7e3;
+  --bg-secondary: #ffffffef;
+  
+  /* COLORES MARCA */
+  --bg-navbar: #2e3a6b; /* AZUL DE LA SIDEBAR */
+  --bg-welcome: linear-gradient(135deg, #4a5f9d 0%, #6b7db8 100%);
+  --accent-color: #3f51b5;
+  
+  /* TEXTO */
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-light: #ffffff;
+  --border-color: #e5e5e7;
+  
+  /* SOMBRAS */
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  /* FONDO CON PUNTOS (Tu patrón original) */
+  --bg-pattern-light: radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px);
+}
+
+body.dark-mode {
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --border-color: #333333;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  
+  /* Patrón Oscuro */
+  --bg-pattern-dark: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-image: var(--bg-pattern-dark);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  background-image: var(--bg-pattern-light);
+  background-size: 15px 15px;
+}
+
+/* ======================================== */
+/* 2. LAYOUT PRINCIPAL                      */
+/* ======================================== */
+.app-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr; /* Sidebar Ancho Fijo | Contenido Flexible */
+  min-height: 100vh;
+}
+
+.main-content {
+  padding: 2rem;
+  padding-top: 4rem; /* MARGEN SUPERIOR QUE PEDISTE */
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Navbar Móvil (Solo visible en pantallas chicas) */
+.mobile-navbar { display: none; }
+
+
+/* ======================================== */
+/* 3. SIDEBAR IZQUIERDA (DISEÑO MEJORADO)   */
+/* ======================================== */
+.sidebar-nav {
+  background-color: var(--bg-navbar); /* AZUL */
+  color: var(--text-light);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Header (Logo + Texto) */
+.sidebar-header {
+  padding: 2rem 1rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.brand-logo-lg { width: 50px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+.brand-text { font-size: 1.2rem; font-weight: 800; letter-spacing: 2px; color: white; text-transform: uppercase; }
+
+/* Contenido Scrollable */
+.sidebar-content-scroll {
+  flex: 1; overflow-y: auto; padding: 1rem;
+}
+
+/* Etiquetas de Grupo */
+.nav-group-label {
+  font-size: 0.7rem; font-weight: 700; color: rgba(255,255,255,0.5);
+  margin: 1.5rem 0 0.5rem 0.5rem; letter-spacing: 1px;
+}
+
+/* Links de Navegación */
+.sidebar-nav-links { display: flex; flex-direction: column; gap: 0.5rem; }
+.sidebar-link {
+  display: flex; align-items: center; gap: 1rem;
+  color: rgba(255, 255, 255, 0.7); text-decoration: none;
+  font-weight: 500; padding: 0.8rem 1rem; border-radius: 10px;
+  transition: all 0.2s ease;
+}
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+.sidebar-link.active {
+  background-color: rgba(255, 255, 255, 0.15); /* Grisáceo translúcido */
+  color: #ffffff; /* Texto Blanco puro */
+  font-weight: 700;
+  box-shadow: none; /* Quitamos sombra si quieres que se vea plano como antes */
+}
+.sidebar-link svg { width: 20px; height: 20px; }
+
+/* Sección Usuario (Abajo) */
+
+/* Botones de acción (Tema / Logout) */
+.sidebar-user-actions { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
+.icon-btn-sm {
+  flex: 1; background: rgba(255,255,255,0.1); border: none;
+  border-radius: 6px; padding: 0.4rem; cursor: pointer;
+  color: white; display: flex; align-items: center; justify-content: center;
+  transition: 0.2s;
+}
+.icon-btn-sm:hover { background: rgba(255,255,255,0.2); }
+.icon-btn-sm.danger:hover { background: rgba(255, 82, 82, 0.2); color: #ff5252; }
+.icon-btn-sm svg { width: 18px; height: 18px; }
+
+.sidebar-user-section {
+  padding: 1rem;
+  background-color: rgba(0,0,0,0.2);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.user-info-row {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.5rem; border-radius: 8px; cursor: pointer;
+  transition: 0.2s;
+}
+.user-info-row:hover { background-color: rgba(255,255,255,0.1); }
+
+.user-avatar-sm { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.5); }
+.user-texts { display: flex; flex-direction: column; overflow: hidden; }
+.user-name-display { font-size: 0.9rem; font-weight: 700; color: white; white-space: nowrap; text-overflow: ellipsis; }
+.user-role-display { font-size: 0.7rem; color: rgba(255,255,255,0.6); }
+
+
+/* Versión */
+.sidebar-version { text-align: center; font-size: 0.7rem; color: rgba(255,255,255,0.3); padding: 0.5rem; }
+
+
+/* ======================================== */
+/* 5. SIDEBAR DERECHA (PERFIL) - RESTAURADA */
+/* ======================================== */
+
+.profile-sidebar {
+  position: fixed;
+  top: 0;
+  right: -450px; /* Oculto a la derecha */
+  width: 400px; /* Ancho original */
+  height: 100vh;
+  background-color: var(--bg-secondary);
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+  z-index: 2001;
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-sidebar.active {
+  right: 0;
+}
+
+.profile-sidebar-content {
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Botón Cerrar y Logo */
+.close-sidebar-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  transition: 0.2s;
+}
+.close-sidebar-btn:hover { color: var(--danger-color); transform: scale(1.1); }
+.close-sidebar-btn svg { width: 28px; height: 28px; }
+
+.profile-sidebar-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+.profile-sidebar-logo .logo-icon { height: 40px; filter: invert(1); 
+  transition: filter 0.3s ease;}
+
+  body.dark-mode .profile-sidebar-logo .logo-icon {
+  filter: none;
+}
+/* Header del Perfil (Foto + Badge) */
+.profile-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.profile-image-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.profile-large-image {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--bg-primary);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* El Badge de Estado (Clave en tu diseño) */
+.status-badge {
+  position: absolute;
+  bottom: 5px;
+  right: 0;
+  background-color: #FF5252; /* Rojo para No Solvente */
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 3px solid var(--bg-secondary);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.profile-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+/* Botones de Acción (Editar + Config) */
+.profile-header-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.edit-btn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 0.9rem;
+}
+.edit-btn:hover { filter: brightness(1.1); }
+
+.settings-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  display: flex; align-items: center; justify-content: center;
+  transition: 0.2s;
+}
+.settings-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* Lista de Información */
+.profile-info {
+  margin-bottom: auto; /* Empuja el footer hacia abajo */
+}
+
+.info-item {
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.info-item:last-child { border-bottom: none; }
+
+.info-item label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.5px;
+}
+
+.info-item p {
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Footer del Sidebar (Feedback + Logout) */
+.theme-toggle-section { text-align: center; margin: 2rem 0; }
+
+.theme-toggle-btn {
+
+  background-color: var(--accent-color); color: white; border: none;
+
+  width: 56px; height: 56px; border-radius: 50%; cursor: pointer;
+
+  display: inline-flex; align-items: center; justify-content: center;
+
+  transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+}
+
+.theme-toggle-btn:hover { background-color: #303f9f; transform: scale(1.1); }
+
+.theme-icon { width: 28px; height: 28px; }
+
+.sidebar-footer-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; }
+
+.feedback-section { margin: 0; }
+
+.feedback-text { font-weight: 600; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.8rem; }
+
+.feedback-btn { background: none; border: 2px solid var(--accent-color); color: var(--accent-color); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; }
+
+.feedback-btn:hover { background-color: var(--accent-color); color: white; }
+
+.feedback-btn svg { width: 16px; height: 16px; }
+
+.logout-btn { background-color: transparent; color: var(--text-secondary); border: 2px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0; border-radius: 50%; width: 48px; height: 48px; padding: 0; transition: 0.3s; }
+
+.logout-btn:hover { color: #FF5252; border-color: #FF5252; }
+
+.logout-btn svg { width: 20px; height: 20px; }
+
+/* Responsive del Profile Sidebar */
+@media (max-width: 480px) {
+  .profile-sidebar { width: 100%; right: -100%; }
+}
+
+
+/* ======================================== */
+/* 5. WELCOME SECTION (Restaurado)          */
+/* ======================================== */
+.welcome-section { 
+  background: var(--bg-welcome); border-radius: 24px; padding: 2.5rem; 
+  margin-bottom: 2rem; display: flex; justify-content: space-between; 
+  align-items: center; color: var(--text-light); box-shadow: var(--card-shadow); 
+  position: relative; overflow: hidden; 
+}
+
+.welcome-section::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><path d="M0,50 Q100,0 200,50 T400,50 L400,100 Q300,150 200,100 T0,100 Z" fill="rgba(255,255,255,0.05)"/><path d="M0,100 Q100,50 200,100 T400,100 L400,150 Q300,200 200,150 T0,150 Z" fill="rgba(255,255,255,0.03)"/></svg>') no-repeat center; background-size: cover; opacity: 0.6; }
+
+.welcome-content { position: relative; z-index: 1; }
+
+.welcome-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+
+.welcome-subtitle { font-size: 1.125rem; opacity: 0.9; margin-bottom: 1.5rem; }
+
+.welcome-profile { position: relative; z-index: 1; }
+
+.welcome-profile-image { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 5px solid rgba(255, 255, 255, 0.5); }
+
+
+/* ======================================== */
+/* 6. RESPONSIVE (MÓVIL)                    */
+/* ======================================== */
+@media (max-width: 768px) {
+  /* Layout reset */
+  .app-layout { display: block; }
+  .main-content { margin-left: 0; padding: 1rem; }
+
+  /* Navbar Móvil Visible */
+  .mobile-navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.8rem 1rem; background-color: var(--bg-navbar);
+    color: white; position: sticky; top: 0; z-index: 1100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .mobile-nav-logo { font-weight: 800; font-size: 1.2rem; letter-spacing: 1px; }
+  .mobile-nav-btn { background: none; border: none; color: white; cursor: pointer; padding: 0.2rem; }
+  .mobile-profile-pic { width: 32px; height: 32px; border-radius: 50%; border: 2px solid white; object-fit: cover; }
+
+  /* Sidebar Izquierda Oculta */
+  .sidebar-nav {
+    position: fixed; left: -100%; top: 0; width: 280px; height: 100%;
+    transition: left 0.3s ease; box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+  }
+  .sidebar-nav.active { left: 0; }
+  
+  /* Sidebar Derecha (Perfil) Oculta */
+  .profile-sidebar { width: 100%; right: -100%; }
+}
+
+/* ======================================== */
+/* MODAL OVERLAY GENERAL                    */
+/* ======================================== */
+
+.overlay { 
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000; /* Alto, pero menor que el sidebar */
+  display: none;
+  backdrop-filter: blur(2px); /* Efecto borroso opcional */
+}
+.overlay.active { display: block; }
+
+/* --- SIDEBAR DERECHA (PERFIL) --- */
+.profile-sidebar {
+  /* ... tus estilos ... */
+  z-index: 2001; /* MAYOR que el overlay (2000) */
+}
+
+/* --- SIDEBAR IZQUIERDA (NAV) EN MÓVIL --- */
+/* En móvil, el menú izq también debe estar encima del overlay */
+@media (max-width: 768px) {
+  .sidebar-nav {
+    z-index: 2002; /* El menú principal gana en móvil */
+  }
+}
+
+/* ======================================== */
+/* MODAL DE FEEDBACK (RESTAURADO)           */
+/* ======================================== */
+
+.feedback-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Z-INDEX 3000: Para estar ENCIMA de la sidebar derecha (2001) y del overlay (2000) */
+  z-index: 3000; 
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px); /* Efecto borroso elegante */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.feedback-modal.active {
+  display: flex;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.feedback-modal-content {
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  border: 1px solid var(--border-color);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.feedback-modal.active .feedback-modal-content {
+  transform: translateY(0);
+}
+
+.feedback-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.feedback-modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Estilos de Formulario dentro del Modal */
+.modal-form .form-group {
+  margin-bottom: 1.2rem;
+}
+
+.modal-form label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.modal-form textarea, 
+.modal-form input, 
+.modal-form select {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical; /* Para textarea */
+}
+
+.modal-form textarea:focus, 
+.modal-form input:focus, 
+.modal-form select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+}
+
+.btn-submit-feedback {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  transition: 0.2s;
+  margin-top: 1rem;
+}
+
+.btn-submit-feedback:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* --- 1. SCROLLBAR PERSONALIZADO (Color Primario) --- */
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color); /* Tu color morado/azul */
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #303f9f; /* Un tono más oscuro */
+}
+
+/* --- BADGE DE FECHA GLOBAL (Estilo "Hoy: ...") --- */
+.date-badge {
+  background: var(--bg-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  box-shadow: var(--card-shadow);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  white-space: nowrap; /* Evita que se rompa en dos líneas */
+}
+
+/* Ajuste responsive para el header */
+@media (max-width: 600px) {
+  .top-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .date-badge-fixed {
+    align-self: flex-start; /* A la izquierda en móvil */
+  }
+}
+
+/* Contenedor de la notificación */
+.toast-notificacion {
+    position: fixed;
+    top: 20px;
+    right: 20px; /* Aparece arriba a la derecha */
+    background: var(--bg-secondary);
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(100%); /* Empieza escondido a la derecha */
+    transition: all 0.3s ease-out;
+    border-left: 5px solid #ccc;
+    font-family: sans-serif;
+    min-width: 300px;
+}
+
+/* Animación para entrar */
+.toast-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Tipos de mensajes */
+.toast-exito {
+    border-left-color: #2ecc71; /* Verde */
+}
+.toast-exito .toast-icono {
+    color: #2ecc71;
+}
+
+.toast-error {
+    border-left-color: #e74c3c; /* Rojo */
+}
+.toast-error .toast-icono {
+    color: #e74c3c;
+}
+
+/* --- NUEVO: MODAL DE CONFIRMACIÓN OSCURO --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Fondo negro semitransparente */
+    backdrop-filter: blur(3px); /* Efecto borroso pro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.modal-confirm-box {
+    /* USAMOS VARIABLES para que cambie de color solo */
+    background: var(--bg-secondary); 
+    color: var(--text-primary);
+    
+    padding: 25px;
+    border-radius: 12px;
+    width: 350px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: scale(0.8);
+    animation: popIn 0.2s forwards;
+}
+
+.modal-titulo { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; display: block; }
+.modal-mensaje { 
+    font-size: 0.95rem; 
+    color: var(--text-secondary); /* Gris adaptativo */
+    margin-bottom: 20px; 
+    display: block; 
+}
+.modal-botones { display: flex; gap: 10px; justify-content: center; }
+
+.btn-modal {
+    padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s;
+}
+.btn-cancelar { background: #333; color: white; }
+.btn-cancelar:hover { background: #444; }
+
+.btn-aceptar { background: #e74c3c; color: white; } /* Rojo peligro */
+.btn-aceptar:hover { background: #c0392b; }
+
+/* Animaciones */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { to { transform: scale(1); } }

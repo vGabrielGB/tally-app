@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TALLY - Mis Pagos</title>
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/pagos.css" />
+  </head>
+  <body>
+    
+    <script>
+      (function() {
+        if (localStorage.getItem('darkMode') === 'true') {
+          document.body.classList.add('dark-mode');
+        }
+      })();
+    </script>
+
+    <nav class="mobile-navbar">
+    <button class="mobile-nav-btn" id="navbarToggler">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    
+    <div class="mobile-nav-logo">TALLY</div>
+    
+    <button class="mobile-nav-btn" id="mobileProfileBtn">
+      <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400" class="mobile-profile-pic">
+    </button>
+  </nav>
+
+  <div class="app-layout">
+    
+    <aside class="sidebar-nav" id="leftSidebar">
+      
+      <div class="sidebar-header">
+        <img src="img/logo.png" alt="Logo" class="brand-logo-lg">
+        <div class="brand-text">TALLY</div>
+      </div>
+
+      <div class="sidebar-content-scroll">
+        
+        <div class="nav-group-label">PRINCIPAL</div>
+        <div class="sidebar-nav-links">
+          <a href="estudiante.html" class="sidebar-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Dashboard</span>
+          </a>
+        </div>
+
+        <div class="nav-group-label">FINANZAS</div>
+        <div class="sidebar-nav-links">
+          <a href="pagos.html" class="sidebar-link active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <span>Reportar Pago</span>
+          </a>
+          <a href="historial.html" class="sidebar-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>Historial</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="sidebar-user-section">
+        <div class="user-info-row" id="profileBtn"> 
+          <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400" class="user-avatar-sm">
+          <div class="user-texts">
+            <span class="user-name-display">Jose González</span>
+            <span class="user-role-display">Estudiante</span>
+          </div>
+        </div>
+        
+        <div class="sidebar-user-actions">
+          <button class="icon-btn-sm" id="themeToggle">
+            <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          
+          <button class="icon-btn-sm danger" id="logoutBtn">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </aside>
+
+            <main class="main-content">
+        <div class="payment-page-container">
+          <h1 class="payment-title">Realizar un Pago</h1>
+          
+          <div class="payment-layout-grid">
+
+            <div class="sidebar-card methods-card-vertical item-methods">
+              <div class="methods-header">
+                <h3 class="sidebar-title">Mis Métodos</h3>
+                </div>
+              <div class="methods-list-vertical" id="savedMethodsList">
+                </div>
+            </div>
+
+            <div class="current-payment-card item-main">
+              <div class="card-header">
+                <div class="header-top">
+                  <h3 class="payment-concept">Cuota 1 - 2025-2</h3>
+                  <span class="header-amount">$50.00</span>
+                </div>
+                <span class="payment-due"></span>
+              </div>
+              <div class="card-body">
+                <div class="details-row">
+                  <div class="detail-box">
+                    <span class="label">Total Abonado</span>
+                    <span class="value value-positive">1.000,00 Bs</span>
+                  </div>
+                  <div class="detail-box">
+                    <span class="label">Equivalente ($)</span>
+                    <span class="value">$25.30</span>
+                  </div>
+                  <div class="detail-box">
+                      <span class="label">Tasa BCV</span>
+                      <span class="value value-rate">39.50</span>
+                  </div>
+                </div>
+                
+                <div class="total-row">
+                  <div class="total-item">
+                    <span class="label">Faltante ($)</span>
+                    <span class="value-due">$24.70 USD</span>
+                  </div>
+                  <div class="total-item total-bs">
+                    <span class="label">Pagar Hoy (Bs)</span>
+                    <span class="value-due-bs">975.65 Bs</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn-pay" id="payButtonActual">Abonar Pago</button>
+              </div>
+            </div>
+
+            <div class="history-preview-wide item-history">
+              <div class="history-header">
+                <h3 class="history-title-section">Historial Reciente</h3>
+                <a href="historial.html" class="link-view-all">Ver todo</a>
+              </div>
+              <div class="history-row-item">
+                <div class="h-icon">✓</div>
+                <div class="h-details">
+                  <span class="h-concept">Inscripción 2025-1</span>
+                  <span class="h-date">10 Sep 2025</span>
+                </div>
+                <span class="h-amount">$100.00</span>
+              </div>
+            </div>
+
+            <div class="sidebar-card bank-data-card item-bank">
+              <h3 class="sidebar-title">Datos para Pagos</h3>
+              <div class="bank-tabs">
+                <button class="bank-tab active" onclick="switchBankTab('pm')">Pago Móvil</button>
+                <button class="bank-tab" onclick="switchBankTab('transf')">Transferencia</button>
+              </div>
+              
+              <div id="data-pm" class="bank-content active">
+                <div class="bank-row">
+                  <span class="bank-label">Banco:</span><span class="bank-val">Banesco (0134)</span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">RIF:</span>
+                  <div class="copy-wrapper"><span class="bank-val">J-12345678-9</span><button class="btn-copy" onclick="copiarTexto('J-12345678-9')">📋</button></div>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">Telf:</span>
+                  <div class="copy-wrapper"><span class="bank-val highlight">0412-8959902</span><button class="btn-copy" onclick="copiarTexto('04128959902')">📋</button></div>
+                </div>
+              </div>
+
+              <div id="data-transf" class="bank-content" style="display: none;">
+                  <div class="bank-row">
+                    <span class="bank-label">Banco:</span><span class="bank-val">Mercantil</span>
+                  </div>
+                  <div class="bank-row">
+                    <span class="bank-label">Titular:</span><span class="bank-val">Inversiones Tally</span>
+                  </div>
+                  <div class="bank-row">
+                    <span class="bank-label">RIF:</span><span class="bank-val">J-12345678-9</span>
+                  </div>
+                  <div class="bank-row">
+                    <span class="bank-label">Cuenta:</span>
+                    <div class="copy-wrapper"><span class="bank-val small-text">0105...</span><button class="btn-copy">📋</button></div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="sidebar-card item-next">
+               <h3 class="sidebar-title">Siguiente</h3>
+              <div class="next-payment-info-compact">
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                  <span class="next-concept">Cuota 2</span>
+                  <span class="next-amount">$50.00</span>
+                </div>
+                <p class="next-date" style="margin:0; font-size:0.85rem; color:var(--text-secondary);">Vence: 15 Dic</p>
+                <div class="locked-status" style="margin-top:0.5rem; text-align:center;">🔒 Bloqueado</div>
+              </div>
+            </div>
+
+          </div> 
+        </div>
+      </main>
+            
+    </div> 
+    
+    <div class="profile-sidebar" id="profileSidebar">
+    <div class="profile-sidebar-content">
+        <button class="close-sidebar-btn" id="closeSidebarBtn">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12l7 7M5 12l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="profile-sidebar-logo">
+          <img src="img/logo.png" alt="TALLY Logo" class="logo-icon" stroke="currentColor" />
+        </div>
+
+        <div class="profile-header">
+  <div class="profile-image-container">
+    <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Profile" class="profile-large-image" id="profileImagePreview">
+    <span class="status-badge" id="sidebarStatusBadge">No Solvente</span>
+    
+    <input type="file" id="profileImageUpload" accept="image/*" style="display: none;">
+    <button class="change-photo-btn" id="changePhotoBtn" style="display: none;">Cambiar</button>
+
+  </div>
+  <h2 class="profile-name">Jose González</h2>
+  <div class="profile-header-actions">
+  <button class="edit-btn" id="editProfileBtn">Editar</button>
+          
+          <a href="perfil.html" class="settings-btn" title="Configuración">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.11-0.2-0.37-0.28-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 l-3.84,0c-0.24,0-0.44,0.17-0.48,0.41L9.2,5.77C8.61,6.01,8.08,6.33,7.58,6.71L5.19,5.75C4.97,5.67,4.71,5.75,4.6,5.95l-1.92,3.32 c-0.11,0.2-0.06,0.47,0.12,0.61l2.03,1.58C4.78,11.7,4.76,12,4.76,12.3c0,0.3,0.02,0.6,0.07,0.9l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.11,0.2,0.37,0.28,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.39,2.96 c0.04,0.24,0.24,0.41,0.48,0.41l3.84,0c0.24,0,0.44-0.17,0.48-0.41l0.39-2.96c0.59-0.24,1.12-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.48,0.01,0.59-0.22l1.92-3.32c0.11-0.2,0.06-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.99,0-3.6-1.61-3.6-3.6 s1.61-3.6,3.6-3.6s3.6,1.61,3.6,3.6S13.99,15.6,12,15.6z" fill="currentColor"/>
+            </svg>
+          </a>
+ </div>
+</div>
+
+<div class="profile-info">
+  <div class="info-item">
+    <label>Correo Electrónico</label>
+    <p id="info-email" data-field="email">pepegonza@gmail.com</p>
+  </div>
+  <div class="info-item">
+    <label>Número de Teléfono</label>
+    <p id="info-phone" data-field="phone">0412 8959902</p>
+  </div>
+  <div class="info-item">
+    <label>Ubicación</label>
+    <p id="info-location" data-field="location">Urb. San jacinto - Maracay - Edo. Aragua</p>
+  </div>
+</div>
+
+        
+        <div class="sidebar-footer-actions">
+        <div class="feedback-section">
+          <p class="feedback-text">¡Tu opinión nos importa!</p>
+          <button class="feedback-btn" id="feedbackBtn">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Dejar comentario
+          </button>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback-modal" id="feedbackModal">
+      <div class="feedback-modal-content">
+        <div class="feedback-modal-header">
+          <h3 class="feedback-modal-title">¡Tu opinión nos importa!</h3>
+          <button class="close-modal-btn" id="closeFeedbackModal">&times;</button>
+        </div>
+        <form id="feedback-form" class="modal-form">
+          <div class="form-group">
+            <label for="feedback-tipo">Tipo de comentario</label>
+            <select id="feedback-tipo" class="feedback-select">
+              <option value="Sugerencia">Sugerencia</option>
+              <option value="Bug">Reportar un error (Bug)</option>
+              <option value="Queja">Queja</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="feedback-comentario">Comentario</label>
+            <textarea id="feedback-comentario" rows="5" placeholder="Escribe tu comentario anónimo aquí..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit-feedback">Enviar Comentario</button>
+        </form>
+      </div>
+    </div>
+
+   <div class="modal-overlay" id="paymentModal">
+  <div class="modal-content" style="max-width: 480px; padding: 20px;">
+    
+    <div class="modal-header-nav">
+      <h3 class="modal-title-dynamic" id="modalTitle">Seleccionar Opción</h3>
+      <button class="close-nav-btn" id="navActionBtn">&times;</button>
+    </div>
+
+    <div class="modal-body">
+      
+      <div id="step-1" class="modal-step active">
+        <p style="margin-bottom:1rem; text-align:center; color:var(--text-secondary);">¿Qué tipo de pago deseas registrar?</p>
+        
+        <div class="method-selection-grid">
+          <div class="method-option-card" onclick="irAlFormulario('PAGO_MOVIL')">
+            <span class="method-icon-lg">📱</span>
+            <strong>Pago Móvil</strong>
+          </div>
+          <div class="method-option-card" onclick="irAlFormulario('TRANSFERENCIA')">
+            <span class="method-icon-lg">🏦</span>
+            <strong>Transferencia</strong>
+          </div>
+        </div>
+      </div>
+
+      <div id="step-2" class="modal-step">
+        <form id="payment-form">
+          <input type="hidden" id="hiddenTipo"> 
+    
+    <input type="hidden" id="inputDeudaId">
+          <input type="hidden" id="hiddenTipo"> <div class="row-compact">
+            <div class="styled-input-group">
+              
+              <label>Banco Emisor</label>
+              <input type="text" class="styled-input" id="inputBanco" placeholder="Ej: Banesco" required>
+            </div>
+            <div class="styled-input-group">
+              <label>Fecha</label>
+              <input type="date" class="styled-input" id="inputFecha" required>
+            </div>
+          </div>
+
+          <div class="styled-input-group">
+            <label>Cédula del Titular</label>
+            <input type="text" class="styled-input" id="inputCedula" placeholder="Ej: V-12345678" required>
+          </div>
+
+          <div id="field-telefono" class="styled-input-group" style="display:none;">
+            <label>Teléfono Origen</label>
+            <input type="text" class="styled-input" id="inputTelefono" placeholder="Ej: 0412-1234567">
+          </div>
+          
+          <div id="field-titular" class="styled-input-group" style="display:none;">
+            <label>Nombre del Titular</label>
+            <input type="text" class="styled-input" id="inputTitular" placeholder="Ej: Juan Perez">
+          </div>
+
+          <div class="row-compact">
+            <div class="styled-input-group">
+              <label>Referencia</label>
+              <input type="text" class="styled-input" id="inputReferencia" placeholder="Ej: 123456" required>
+            </div>
+            <div class="styled-input-group">
+              <label>Monto (Bs)</label>
+              <input type="number" step="0.01" class="styled-input" id="inputMonto" placeholder="0.00" required>
+            </div>
+          </div>
+
+          <div class="styled-input-group">
+            <label>Captura</label>
+            <input type="file" id="inputArchivo" class="styled-input" style="padding-top: 10px;" required>
+          </div>
+
+          <div class="switch-wrapper" id="wrapperGuardar">
+            <span style="font-size: 0.9rem; color: var(--text-primary);">Guardar en "Mis Métodos"</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggleGuardar">
+              <span class="slider"></span>
+            </label>
+          </div>
+          
+          <div class="styled-input-group" id="groupAlias" style="display:none; margin-top: 15px;">
+             <label>Alias para guardar</label>
+             <input type="text" class="styled-input" id="inputAlias" placeholder="Ej: Banesco de Papá">
+          </div>
+
+          <button type="submit" class="btn-submit-pay" id="btnReportar" style="margin-top: 1.5rem; width:100%;">Confirmar Pago</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/pagos.js"></script>
+    
+    <script>
+      const toggler = document.getElementById('navbarToggler');
+      const leftSidebar = document.getElementById('leftSidebar');
+      if(toggler && leftSidebar) {
+        toggler.addEventListener('click', () => {
+          leftSidebar.classList.toggle('active');
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+/* ======================================== */
+/* ESTILOS AUDITORÍA (dueno-auditoria.css)  */
+/* ======================================== */
+
+/* --- BARRA DE FILTROS SUPERIOR --- */
+.audit-filter-bar {
+  display: flex;
+  align-items: flex-end; /* Alinear inputs abajo */
+  gap: 1rem;
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.filter-group { display: flex; flex-direction: column; gap: 0.3rem; }
+.filter-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-left: 2px; }
+
+/* Inputs personalizados */
+.audit-input, .audit-select {
+  padding: 0.6rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  min-width: 140px;
+}
+.audit-input:focus, .audit-select:focus { border-color: var(--accent-color); }
+
+/* Grupo de búsqueda flexible */
+.search-group { flex-grow: 1; }
+.search-wrapper { display: flex; position: relative; width: 100%; }
+.search-wrapper input { width: 100%; padding-right: 2.5rem; } /* Espacio para lupa */
+.btn-search-icon {
+  position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; font-size: 1rem;
+}
+
+.filter-actions { margin-left: auto; } /* Empujar a la derecha */
+.download-btn { background-color: var(--accent-color); color: white; border: none; font-weight: 600; padding: 0.6rem 1rem; border-radius: 8px; cursor: pointer; }
+
+
+/* --- TABLA DE AUDITORÍA --- */
+.audit-table th { background-color: var(--bg-primary); font-size: 0.75rem; text-transform: uppercase; color: var(--text-secondary); }
+.audit-table td { font-size: 0.85rem; padding: 0.8rem 1.5rem; }
+
+/* Columna Fecha */
+.log-date { font-family: monospace; color: var(--text-secondary); }
+
+/* Columna Usuario */
+.log-user { font-weight: 600; color: var(--text-primary); }
+.log-role { font-size: 0.75rem; color: var(--text-secondary); display: block; }
+
+/* BADGES DE TIPO DE ACCIÓN */
+.log-badge {
+  padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 700;
+  display: inline-block; text-transform: uppercase;
+}
+
+/* Colores Semánticos */
+.log-success { background: rgba(76, 175, 80, 0.15); color: #4CAF50; border: 1px solid rgba(76, 175, 80, 0.2); }
+.log-danger  { background: rgba(244, 67, 54, 0.15); color: #F44336; border: 1px solid rgba(244, 67, 54, 0.2); }
+.log-warning { background: rgba(255, 152, 0, 0.15); color: #FF9800; border: 1px solid rgba(255, 152, 0, 0.2); }
+.log-info    { background: rgba(33, 150, 243, 0.15); color: #2196F3; border: 1px solid rgba(33, 150, 243, 0.2); }
+
+/* Detalle técnico */
+.log-detail { font-family: monospace; font-size: 0.8rem; color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px; }
+
+
+/* --- PAGINACIÓN --- */
+.pagination-container {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 0; margin-top: 1rem;
+}
+.page-info { font-size: 0.85rem; color: var(--text-secondary); }
+.pagination-controls { display: flex; gap: 0.3rem; }
+.page-btn {
+  background: var(--bg-secondary); border: 1px solid var(--border-color);
+  color: var(--text-primary); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; transition: 0.2s;
+}
+.page-btn:hover { background: var(--bg-primary); border-color: var(--accent-color); }
+.page-btn.active { background: var(--accent-color); color: white; border-color: var(--accent-color); }
+.page-btn.disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .audit-filter-bar { flex-direction: column; align-items: stretch; }
+  .search-group { width: 100%; }
+  .pagination-container { flex-direction: column; gap: 1rem; }
+}
+
+.filter-actions { margin-left: auto; display: flex; gap: 0.5rem; align-items: flex-end; }
+
+/* Botones de Barra */
+.download-btn { background-color: var(--accent-color); color: white; border: none; font-weight: 600; padding: 0.6rem 1rem; border-radius: 8px; cursor: pointer; }
+.feedback-trigger { background-color: transparent; border: 1px solid var(--border-color); color: var(--text-primary); font-weight: 600; padding: 0.6rem 1rem; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+.feedback-trigger:hover { background-color: var(--bg-primary); border-color: var(--accent-color); }
+
+
+/* --- TABLA DE AUDITORÍA --- */
+.audit-table th { background-color: var(--bg-primary); font-size: 0.75rem; text-transform: uppercase; color: var(--text-secondary); padding: 1rem 1.5rem; }
+.audit-table td { font-size: 0.85rem; padding: 0.8rem 1.5rem; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+
+/* CLASE PARA CENTRAR LA COLUMNA ACCIÓN */
+.col-center { text-align: center; }
+.audit-table td.col-center { text-align: center; } /* Asegura que la celda también se centre */
+
+/* BADGES DE ACCIÓN (ALINEACIÓN PERFECTA) */
+.log-badge {
+  padding: 0.3rem 0; /* Padding vertical solo */
+  border-radius: 6px; 
+  font-size: 0.7rem; 
+  font-weight: 700;
+  display: inline-block; 
+  text-transform: uppercase;
+  /* LA CLAVE: Ancho mínimo fijo para que todos midan igual */
+  min-width: 100px; 
+  text-align: center;
+}
+
+/* Colores Semánticos */
+.log-success { background: rgba(76, 175, 80, 0.15); color: #4CAF50; border: 1px solid rgba(76, 175, 80, 0.2); }
+.log-danger  { background: rgba(244, 67, 54, 0.15); color: #F44336; border: 1px solid rgba(244, 67, 54, 0.2); }
+.log-warning { background: rgba(255, 152, 0, 0.15); color: #FF9800; border: 1px solid rgba(255, 152, 0, 0.2); }
+.log-info    { background: rgba(33, 150, 243, 0.15); color: #2196F3; border: 1px solid rgba(33, 150, 243, 0.2); }
+
+/* Detalles */
+.log-date { font-family: monospace; color: var(--text-secondary); }
+.log-user { font-weight: 600; color: var(--text-primary); display: block; }
+.log-role { font-size: 0.75rem; color: var(--text-secondary); }
+.log-detail { font-family: monospace; font-size: 0.8rem; color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px; }
+
+/* --- MODAL FEEDBACK --- */
+.feedback-list-container { max-height: 400px; overflow-y: auto; }

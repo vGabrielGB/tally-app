@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TALLY - Panel Dueño</title>
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dueño.css" /> 
+
+    <script>
+      (function() {
+        const isDark = localStorage.getItem('darkMode') === 'true';
+        document.body.classList.toggle('dark-mode', isDark);
+      })();
+    </script>
+
+  </head>
+  <body>
+   
+  <nav class="mobile-navbar">
+    <button class="mobile-nav-btn" id="navbarToggler">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    
+    <div class="mobile-nav-logo">TALLY</div>
+    
+    <button class="mobile-nav-btn" id="mobileProfileBtn">
+      <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400" class="mobile-profile-pic">
+    </button>
+  </nav>
+
+  <div class="app-layout">
+    
+    <aside class="sidebar-nav" id="leftSidebar">
+      
+      <div class="sidebar-header">
+        <img src="img/logo.png" alt="Logo" class="brand-logo-lg">
+        <div class="brand-text">TALLY</div>
+        </div>
+
+      <div class="sidebar-content-scroll">
+        
+        <div class="nav-group-label">PRINCIPAL</div>
+        <div class="sidebar-nav-links">
+          <a href="dueño.html" class="sidebar-link active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Dashboard</span>
+          </a>
+        </div>
+
+        <div class="nav-group-label">ADMINISTRACIÓN</div>
+        <div class="sidebar-nav-links">
+          <a href="personal.html" class="sidebar-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Personal</span>
+          </a>
+          <a href="dueño-estudiante.html" class="sidebar-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            <span>Estudiantes</span>
+          </a>
+        </div>
+
+        <div class="nav-group-label">SISTEMA</div>
+        <div class="sidebar-nav-links">
+          <a href="dueño-config.html" class="sidebar-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span>Configuración</span>
+          </a>
+          <a href="auditoria.html" class="sidebar-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>Auditoría</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="sidebar-user-section">
+        <div class="user-info-row" id="profileBtn"> 
+          <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400" class="user-avatar-sm">
+          <div class="user-texts">
+            <span class="user-name-display">Carlos Dueño</span>
+            <span class="user-role-display">Super Admin</span>
+          </div>
+        </div>
+        
+        <div class="sidebar-user-actions">
+          <button class="icon-btn-sm" id="themeToggle">
+            <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          
+          <button class="icon-btn-sm danger" id="logoutBtn">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </aside>
+
+      <main class="main-content">
+        <div class="dashboard-wrapper-admin">
+          
+          <div class="admin-left-section">
+            
+            <section class="welcome-section">
+              <div class="welcome-content">
+                <h1 class="welcome-title">Panel Administrativo</h1>
+                <p class="welcome-subtitle">Visión general del estado financiero y operativo.</p>
+                
+              </div>
+              <div class="welcome-profile" style="display: flex; align-items: center; justify-content: center;">
+                 <div class="admin-donut-chart">
+                   <svg viewBox="0 0 36 36" class="circular-chart">
+                      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <path class="circle" stroke-dasharray="85, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <text x="18" y="20.35" class="percentage">85%</text>
+                    </svg>
+                    <p style="text-align: center; font-size: 0.8rem; margin-top: 0.5rem; color:white;">Solvencia</p>
+                 </div>
+              </div>
+            </section>
+
+            <div class="kpi-grid">
+              
+              <div class="card card-kpi">
+                <div class="card-icon"><span style="font-size: 1.5rem;">💰</span></div>
+                <div class="card-content">
+                  <h3 class="card-title">Ingresos Mes</h3>
+                  <h2 class="kpi-value">$12,450</h2>
+                  <p class="kpi-sub positive">Total Aprobado</p>
+                </div>
+              </div>
+
+              <div class="card card-kpi">
+                <div class="card-icon"><span style="font-size: 1.5rem;">🎓</span></div>
+                <div class="card-content">
+                  <h3 class="card-title">Total Estudiantes</h3>
+                  <h2 class="kpi-value">1,240</h2>
+                  <p class="kpi-sub neutral">180 Morosos</p>
+                </div>
+              </div>
+
+              <div class="card card-kpi card-tasa">
+                <div class="card-icon"><span style="font-size: 1.5rem;">📈</span></div>
+                <div class="card-content">
+                  <h3 class="card-title">Tasa BCV</h3>
+                  <h2 class="kpi-value">39.50 Bs</h2>
+                  <button class="btn-mini-action" id="btnUpdateTasa" style="margin-top: 5px;">Actualizar</button>
+                </div>
+                <div class="currency-switch-vertical">
+    <button class="curr-btn active" onclick="switchCurrency('USD')" id="btnSwitchUsd">$</button>
+    <button class="curr-btn" onclick="switchCurrency('EUR')" id="btnSwitchEur">€</button>
+  </div>
+              </div>
+
+            </div>
+
+            <div class="card chart-card">
+              <h3 class="card-title">Ingresos vs Cuotas Anteriores</h3>
+              <div class="chart-wrapper">
+    <div class="chart-bars-container">
+        <p style="margin:auto; color:gray;">Cargando gráfico...</p>
+    </div>
+</div>
+            </div>
+
+          </div>
+
+          <aside class="admin-sidebar-right">
+            
+            <div class="card activity-card">
+              <h3 class="card-title">Actividad Reciente</h3>
+              <div class="activity-list">
+                
+                <div class="activity-item">
+                  <div class="activity-icon payment">$</div>
+                  <div class="activity-info">
+                    <strong>Pago Aprobado</strong>
+                    <p>Juan Pérez aprobó a Jose G. ($50)</p>
+                    <span class="time">Hace 5 min</span>
+                  </div>
+                </div>
+
+                <div class="activity-item">
+                  <div class="activity-icon user">👤</div>
+                  <div class="activity-info">
+                    <strong>Nuevo Usuario</strong>
+                    <p>Ana Gómez (Admin) creado</p>
+                    <span class="time">Hace 2 hrs</span>
+                  </div>
+                </div>
+
+                <div class="activity-item">
+                  <div class="activity-icon alert">⚠️</div>
+                  <div class="activity-info">
+                    <strong>Pago Rechazado</strong>
+                    <p>Ref. 123456 inválida</p>
+                    <span class="time">Hace 3 hrs</span>
+                  </div>
+                </div>
+
+              </div>
+              <button class="view-all-btn">Ver Auditoría Completa</button>
+            </div>
+
+            <div class="card quick-actions-card">
+              <h3 class="card-title">Acciones Rápidas</h3>
+              <button class="action-btn-full">+ Registrar Nuevo Empleado</button>
+              <button class="action-btn-full outline" onclick="window.open('/api/reportes/pagos/pdf', '_blank')">Generar Reporte PDF</button>
+              <input type="file" id="excelInput" accept=".xlsx" style="display: none;">
+
+<button class="action-btn-full" onclick="document.getElementById('excelInput').click()">
+    📂 Importar Excel
+</button>
+            </div>
+
+          </aside>
+
+        </div>
+      </main>
+    </div>
+
+    <div class="profile-sidebar" id="profileSidebar">
+    <div class="profile-sidebar-content">
+        <button class="close-sidebar-btn" id="closeSidebarBtn">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12l7 7M5 12l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="profile-sidebar-logo">
+          <img src="img/logo.png" alt="TALLY Logo" class="logo-icon" stroke="currentColor" />
+        </div>
+
+        <div class="profile-header">
+  <div class="profile-image-container">
+    <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Profile" class="profile-large-image" id="profileImagePreview">
+    
+    <input type="file" id="profileImageUpload" accept="image/*" style="display: none;">
+    <button class="change-photo-btn" id="changePhotoBtn" style="display: none;">Cambiar</button>
+
+  </div>
+  <h2 class="profile-name">Jose González</h2>
+  <div class="profile-header-actions">
+  <button class="edit-btn" id="editProfileBtn">Editar</button>
+          
+          <a href="perfil.html" class="settings-btn" title="Configuración">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.11-0.2-0.37-0.28-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 l-3.84,0c-0.24,0-0.44,0.17-0.48,0.41L9.2,5.77C8.61,6.01,8.08,6.33,7.58,6.71L5.19,5.75C4.97,5.67,4.71,5.75,4.6,5.95l-1.92,3.32 c-0.11,0.2-0.06,0.47,0.12,0.61l2.03,1.58C4.78,11.7,4.76,12,4.76,12.3c0,0.3,0.02,0.6,0.07,0.9l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.11,0.2,0.37,0.28,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.39,2.96 c0.04,0.24,0.24,0.41,0.48,0.41l3.84,0c0.24,0,0.44-0.17,0.48-0.41l0.39-2.96c0.59-0.24,1.12-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.48,0.01,0.59-0.22l1.92-3.32c0.11-0.2,0.06-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.99,0-3.6-1.61-3.6-3.6 s1.61-3.6,3.6-3.6s3.6,1.61,3.6,3.6S13.99,15.6,12,15.6z" fill="currentColor"/>
+            </svg>
+          </a>
+ </div>
+</div>
+
+<div class="profile-info">
+  <div class="info-item">
+    <label>Correo Electrónico</label>
+    <p id="info-email" data-field="email">pepegonza@gmail.com</p>
+  </div>
+  <div class="info-item">
+    <label>Número de Teléfono</label>
+    <p id="info-phone" data-field="phone">0412 8959902</p>
+  </div>
+  <div class="info-item">
+    <label>Ubicación</label>
+    <p id="info-location" data-field="location">Urb. San jacinto - Maracay - Edo. Aragua</p>
+  </div>
+</div>
+
+        
+
+      </div>
+    </div>
+  <div class="overlay" id="overlay"></div>
+
+    <script src="js/main.js"></script>
+    <script src="js/dueño.js"></script>
+    <script>
+      // Script específico para menú hamburguesa
+      const toggler = document.getElementById('navbarToggler');
+      const leftSidebar = document.getElementById('leftSidebar');
+      if(toggler && leftSidebar) {
+        toggler.addEventListener('click', () => {
+          leftSidebar.classList.toggle('active');
+        });
+      }
+    </script>
+    <script>
+    // Pequeño script inline o agregar a main.js para el botón de perfil en móvil
+    const mobileProfileBtn = document.getElementById('mobileProfileBtn');
+    const profileSidebar = document.getElementById('profileSidebar');
+    const overlay = document.getElementById('overlay');
+    
+    if(mobileProfileBtn && profileSidebar) {
+      mobileProfileBtn.addEventListener('click', () => {
+        profileSidebar.classList.add('active');
+        overlay.classList.add('active');
+      });
+    }
+  </script>
+  </body>
+</html>

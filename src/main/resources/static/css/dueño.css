@@ -1,0 +1,472 @@
+/* ======================================== */
+/* ESTILOS ESPECÍFICOS DEL DUEÑO (CORREGIDO) */
+/* ======================================== */
+
+/* --- LAYOUT PRINCIPAL --- */
+.dashboard-wrapper-admin {
+  display: grid;
+  /* CAMBIO: Columna derecha más ancha (400px) para que la actividad se vea mejor */
+  grid-template-columns: 1fr 400px; 
+  gap: 2rem;
+  align-items: start;
+}
+
+.admin-left-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.admin-sidebar-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* CAMBIO: Hacemos que ocupe todo el alto disponible si es necesario */
+  height: 100%; 
+}
+
+/* --- CLASE GENÉRICA DE TARJETA (FIX DE FONDO) --- */
+.card {
+  background-color: var(--bg-secondary); /* Asegura el color de fondo */
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color); /* Borde sutil para definición */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- KPI GRID --- */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.card-kpi {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-left: 4px solid var(--accent-color);
+}
+
+.card-kpi .card-icon {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(63, 81, 181, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+}
+
+.kpi-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.kpi-sub {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+.kpi-sub.positive { color: #4CAF50; }
+.kpi-sub.neutral { color: var(--text-secondary); }
+.kpi-sub.negative { color: #FF5252; }
+
+/* Botón pequeño dentro de KPI */
+.btn-mini-action {
+  background: none; border: 1px solid var(--accent-color); color: var(--accent-color);
+  border-radius: 4px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;
+  margin-top: 0.5rem; transition: 0.2s;
+}
+.btn-mini-action:hover { background: var(--accent-color); color: white; }
+
+
+/* --- GRÁFICO DONA --- */
+.admin-donut-chart { width: 100px; position: relative; margin-left: 2rem; }
+.circular-chart { display: block; margin: 0 auto; max-width: 100%; max-height: 250px; }
+.circle-bg { fill: none; stroke: rgba(255, 255, 255, 0.2); stroke-width: 2.5; }
+.circle { fill: none; stroke: #4CAF50; stroke-width: 2.5; stroke-linecap: round; animation: progress 1s ease-out forwards; }
+.percentage { fill: #fff; font-family: sans-serif; font-weight: bold; font-size: 0.5em; text-anchor: middle; }
+@keyframes progress { 0% { stroke-dasharray: 0 100; } }
+
+
+/* --- GRÁFICO BARRAS --- */
+.chart-card { flex-direction: column; min-height: 320px; display: flex; border-left: 6px solid var(--accent-color);}
+.chart-bars-container {
+  display: flex;
+    justify-content: space-around; /* Distribuye espacio */
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+}
+.chart-bar-group {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 12%; /* Barras más anchas */
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.chart-bar-group:hover {
+    transform: translateY(-5px);
+}
+
+.chart-bar {
+  width: 100%; background-color: var(--bg-primary); border-radius: 8px 8px 0 0;
+  transition: height 1s ease; position: relative;
+}
+.chart-bar:hover { opacity: 0.8; }
+.chart-bar.active { background-color: var(--accent-color); box-shadow: 0 0 15px rgba(63, 81, 181, 0.3); }
+.chart-bar-group span { margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-secondary); }
+
+.chart-bar-bg {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    min-height: 4px;
+}
+.chart-bar-fill {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 8px;
+    transition: height 1s ease-out;
+}
+
+.chart-value {
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.chart-label {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-align: center;
+    font-weight: 500;
+    /* Para que se vean los nombres completos si es posible */
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+/* === ANIMACIÓN: hacer crecer las barras (igual que admin) === */
+/* Iniciamos el relleno en 0% y dejamos que la animación alcance
+   la altura inline que pone el JS (por ejemplo style="height: 60%") */
+.chart-bar-fill {
+  height: 0%;
+  animation: growBar 1s ease-out forwards;
+}
+
+@keyframes growBar {
+  from { height: 0%; }
+}
+
+/* Forzar una altura mínima del contenedor para que las columnas se animen correctamente */
+.chart-bars-container {
+  min-height: 320px;
+}
+
+}
+
+/* --- LISTA DE ACTIVIDAD (MEJORADA) --- */
+.activity-card {
+  flex-direction: column;
+  /* CAMBIO: Altura fija mayor para que se vea más contenido */
+  height: 500px; 
+  display: flex;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* Quitamos gap para usar border-bottom */
+  overflow-y: auto; /* Scroll si hay muchas */
+  flex-grow: 1; /* Ocupa todo el espacio disponible */
+  margin-bottom: 1rem;
+  padding-right: 0.5rem; /* Espacio para el scrollbar */
+}
+
+.activity-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px dashed var(--border-color);
+  align-items: flex-start;
+}
+.activity-item:last-child { border-bottom: none; }
+
+.activity-icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.activity-icon.payment { background: rgba(76, 175, 80, 0.15); color: #4CAF50; }
+.activity-icon.user { background: rgba(33, 150, 243, 0.15); color: #2196F3; }
+.activity-icon.alert { background: rgba(255, 82, 82, 0.15); color: #FF5252; }
+
+.activity-info { display: flex; flex-direction: column; }
+.activity-info strong { font-size: 0.95rem; color: var(--text-primary); }
+.activity-info p { font-size: 0.85rem; color: var(--text-secondary); margin: 0.2rem 0; }
+.activity-info .time { font-size: 0.75rem; color: var(--text-secondary); opacity: 0.7; }
+
+.view-all-btn {
+  background: none; border: none; color: var(--accent-color);
+  font-weight: 700; cursor: pointer; padding-top: 1rem;
+  border-top: 1px solid var(--border-color); text-transform: uppercase; font-size: 0.8rem;
+}
+.view-all-btn:hover { letter-spacing: 1px; transition: 0.2s; }
+
+/* --- ACCIONES RÁPIDAS --- */
+.quick-actions-card { flex-direction: column; gap: 1rem; }
+.action-btn-full {
+  width: 100%; padding: 0.9rem; background-color: var(--accent-color);
+  margin-top: 3px;
+  color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.2s;
+}
+.action-btn-full.outline { background: transparent; border: 2px solid var(--border-color); color: var(--text-primary); }
+.action-btn-full:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.action-btn-full.outline:hover { border-color: var(--accent-color); color: var(--accent-color); }
+
+
+/* --- HEADER Y NAVEGACIÓN --- */
+.top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.top-header h1 { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); margin: 0; }
+.date-badge { background: var(--bg-secondary); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; box-shadow: var(--card-shadow); color: var(--text-secondary); border: 1px solid var(--border-color); }
+
+/* Sidebar Footer */
+.sidebar-footer { margin-top: auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+.logout-btn-text { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; margin-top: 1rem; font-size: 0.9rem; transition: 0.2s; }
+.logout-btn-text:hover { color: #FF5252; }
+.sidebar-brand { display: flex; align-items: center; gap: 1rem; padding: 0 1rem; margin-bottom: 2rem; }
+.brand-logo { width: 40px; }
+.brand-text { font-size: 1.2rem; font-weight: 800; letter-spacing: 2px; color: var(--text-light); }
+
+/* Tarjeta Tasa con layout especial */
+.card-tasa {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px; /* Espacio para el switch */
+}
+
+/* El Switch Vertical */
+.currency-switch-vertical {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-secondary); /* O un color gris claro/oscuro */
+    border-radius: 20px;
+    padding: 4px;
+    gap: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.curr-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+/* Estado Activo del Botón */
+.curr-btn.active {
+    background: var(--primary-color); /* Color principal (azul/morado) */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.curr-btn:hover:not(.active) {
+    background: rgba(0,0,0,0.05);
+}
+
+/* Animación de carga para el botón actualizar */
+.rotating {
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .dashboard-wrapper-admin { grid-template-columns: 1fr; }
+  .admin-sidebar-right { display: grid; grid-template-columns: 1fr 1fr; }
+  .activity-card { height: 400px; } /* Reset altura en layout horizontal */
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar-right { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr; }
+  .top-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}
+
+/* === ESTILOS DEL GRÁFICO UNIFICADO (BARRAS HTML) === */
+.chart-card {
+  height: auto;
+  min-height: 420px; /* Más alto para que las columnas tengan espacio */
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-bars-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  flex-grow: 1;
+  padding: 2.5rem 1.5rem 0 1.5rem;
+  /* Eliminada la línea inferior para aprovechar todo el alto */
+  height: 50px; /* Altura mayor para columnas más altas */
+  gap: 18px;
+}
+
+.chart-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  width: 18%; /* Columnas más anchas para nombres largos */
+  max-width: 120px; /* Limitar ancho máximo para pantallas grandes */
+  position: relative;
+}
+
+/* La barra gris de fondo (La Meta) */
+.chart-bar-bg {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.05); /* Gris sutil */
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden; /* Para que el relleno no se salga */
+  transition: height 1s ease;
+  min-height: 7px; /* Un poco más visible */
+  max-width: 120px; /* Coincide con la columna */
+}
+
+/* La barra de color (El Progreso) */
+.chart-bar-fill {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 8px;
+  transition: height 1s ease-out;
+}
+
+/* Etiquetas */
+.chart-label {
+  margin-top: 0.8rem;
+  font-size: 0.85rem; /* Texto un poco más grande */
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-align: center;
+  white-space: normal; /* Permite varias líneas si hace falta */
+  overflow: visible;
+  text-overflow: clip;
+  max-width: 120px;
+}
+
+.chart-value {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+/* --- ESTILOS DEL GRÁFICO --- */
+.chart-wrapper {
+  display: flex;
+  align-items: flex-end;
+  height: 340px; /* Mayor altura para barras */
+  padding-top: 12px;
+  width: 100%;
+}
+
+.chart-bars-container {
+  display: flex;
+  justify-content: space-around; /* Distribuye espacio equitativo */
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  gap: 22px; /* Separación entre barras */
+}
+
+.chart-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  height: 100%;
+  position: relative;
+  cursor: pointer; /* Manito al pasar el mouse */
+  transition: transform 0.2s;
+}
+
+.chart-bar-group:hover {
+  transform: translateY(-6px); /* Efecto pop */
+}
+
+.chart-value {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.chart-bar-bg {
+  width: 100%;
+  max-width: 120px; /* Ancho máximo mayor */
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil */
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  /* La altura se define inline en el HTML */
+}
+
+.chart-bar-fill {
+  width: 100%;
+  transition: height 1.0s ease-out; /* Animación suave al cargar */
+}
+
+.chart-label {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip; /* Mostrar más del nombre */
+  max-width: 120px;
+}
+
+.welcome-section {
+  margin: 0;
+}
+

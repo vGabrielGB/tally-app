@@ -1,0 +1,286 @@
+/* ======================================== */
+/* ESTILOS DE PÁGINA DE HISTORIAL */
+/* ======================================== */
+
+.history-container {
+  /* Reutilizamos la tarjeta base de tu dashboard */
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  border-left: 6px solid var(--accent-color);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Para que en móviles se apile */
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+.history-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-container label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.period-select {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.period-select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+/* --- Tabla de Historial --- */
+
+.history-table-container {
+  overflow-x: auto; /* Permite scroll horizontal en móviles */
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse; /* Bordes limpios */
+}
+
+.history-table th,
+.history-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.history-table th {
+  /* Encabezados de la tabla */
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.history-table td {
+  /* Celdas de datos */
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Reutilizamos los status-tag que ya definiste en style.css */
+.history-table .status-tag {
+  padding: 0.25rem 0.75rem; /* Más pequeños */
+  font-size: 0.75rem;
+}
+/* ======================================== */
+/* ESTILOS DE PÁGINA DE HISTORIAL */
+/* ======================================== */
+
+.history-container {
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; 
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+.history-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-container label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* --- Select Mejorado --- */
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.period-select {
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-weight: 600;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.period-select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+.select-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none; 
+}
+.period-select option {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ======================================== */
+/* NUEVA SECCIÓN: TARJETAS DE RESUMEN */
+/* ======================================== */
+.history-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  gap: 1.5rem;
+  margin-bottom: 2rem; /* Espacio antes de la tabla */
+}
+
+.summary-card {
+  background-color: var(--bg-primary); /* Fondo sutil */
+  border-radius: 12px;
+  padding: 1.5rem;
+  border-left: 5px solid var(--accent-color); /* Acento de color */
+}
+
+.summary-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.summary-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.summary-subtext {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Modificadores de color */
+.summary-value.text-success {
+  color: #4CAF50;
+}
+.summary-value.text-danger {
+  color: #FF5252;
+}
+.summary-card.accent-success {
+  border-left-color: #4CAF50;
+}
+.summary-card.accent-danger {
+  border-left-color: #FF5252;
+}
+
+
+/* --- Tabla de Historial --- */
+.history-table-container {
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+.history-table th {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.history-table td {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.history-table .status-tag {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+/* Nuevo botón de "Ver" */
+.btn-view-receipt {
+  /* Reutilizamos el .feedback-btn */
+  background: none;
+  border: 2px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s;
+}
+.btn-view-receipt:hover {
+  background-color: var(--bg-primary);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* --- Media Queries --- */
+@media (max-width: 900px) {
+  .history-summary-grid {
+    grid-template-columns: 1fr; /* Apila las tarjetas */
+  }
+}

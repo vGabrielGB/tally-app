@@ -1,0 +1,445 @@
+.alert-banner {
+  background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--card-shadow);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.search-container {
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  font-size: 1rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: border-color 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.verificar-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.left-section-verificar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.right-section-verificar {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.estudiantes-card {
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  border-left: 6px solid var(--accent-color);
+}
+
+.estudiantes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  /* SCROLL MÁGICO */
+  height: 500px; /* Altura fija */
+  overflow-y: auto;  /* Scroll vertical */
+  padding-right: 10px; /* Espacio para la barra */
+  border-radius: 8px;
+}
+
+.estudiante-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--bg-primary);
+  border-radius: 12px;
+  transition: background-color 0.2s, border-color 0.15s;
+  border: 1px solid transparent; /* permite mostrar color de borde en hover */
+}
+
+.estudiante-item:hover {
+  background-color: rgba(63, 81, 181, 0.05);
+  border-color: var(--accent-color);
+}
+
+.estudiante-info {
+  flex: 1;
+}
+
+.estudiante-name {
+  color: var(--text-primary);
+  font-weight: 500;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+
+
+.status-badge-inscrito {
+  background-color: #7cb342;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  margin-left: 1rem;
+}
+
+/* Estatus: PENDIENTE (Amarillo) - LO QUE PEDISTE */
+.status-badge-pendiente {
+    background-color: #f0a606;
+    color: #ffffff;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+  margin-left: 1rem;
+}
+
+
+.estadistica-card {
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  border-left: 6px solid var(--accent-color);
+}
+
+.chart-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bar-chart {
+  width: 100%;
+  height: 200px; /* más pequeño para evitar overflow vertical */
+  max-width: 400px; /* reduce el ancho visual del gráfico */
+  color: var(--text-primary);
+}
+
+.cuotas-list {
+  /* Convertimos el contenedor en una tarjeta como la de estudiantes */
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+  height: 600px;
+  padding-right: 0.5rem;
+}
+
+.cuotas-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cuotas-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cuotas-list::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+
+.cuota-card {
+  /* Las tarjetas internas ahora usan el fondo primario (como estudiante items)
+     y quedan visualmente planas dentro del contenedor .cuotas-list */
+  background-color: var(--bg-primary);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: none;
+  transition: background-color 0.15s, transform 0.12s, border-color 0.15s;
+  border: 1px solid transparent; /* permite mostrar color de borde en hover */
+}
+
+.cuota-card:hover {
+  transform: translateY(-2px);
+  background-color: rgba(63, 81, 181, 0.03);
+  border-color: var(--accent-color);
+}
+
+.cuota-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.cuota-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.cuota-action-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.cuota-action-btn:hover {
+  color: var(--accent-color);
+}
+
+.cuota-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cuota-text {
+  font-size: 0.95rem;
+  margin: 0;
+  color: var(--text-primary);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cuota-text .label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.cuota-text .value {
+  color: var(--text-primary);
+}
+
+@media (max-width: 1200px) {
+  .verificar-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .cuotas-list {
+    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    gap: 1.5rem;
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .verificar-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .alert-banner {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+
+  .search-input {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .estudiante-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .status-badge-solvente {
+    margin-left: 0;
+  }
+
+  .bar-chart {
+    max-width: 100%;
+  }
+
+  .cuotas-list {
+    max-height: none;
+    padding-right: 0;
+  }
+}
+
+/* ======================================== */
+/* ESTILOS DEL MODAL (IMPORTANTE) */
+/* ======================================== */
+.modal-overlay {
+  display: none; /* <--- ESTO LO OCULTA POR DEFECTO */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+}
+
+.modal-overlay.active {
+  display: flex; /* <--- ESTO LO MUESTRA CUANDO TIENE LA CLASE */
+}
+
+.modal-content {
+  background-color: var(--bg-secondary);
+  width: 90%;
+  max-width: 500px;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.detail-group { display: flex; flex-direction: column; }
+.detail-label { font-size: 0.8rem; color: var(--text-secondary); }
+.detail-val { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+
+.img-placeholder {
+  background-color: #e0e0e0;
+  height: 200px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  margin-bottom: 1.5rem;
+  border: 2px dashed #bdbdbd;
+}
+
+.modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.btn-approve {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.btn-approve:hover { background-color: #43a047; transform: scale(1.02); }
+
+.btn-reject {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.btn-reject:hover { background-color: #d32f2f; transform: scale(1.02); }
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Botón Aprobar */
+#btnAprobar {
+  background: linear-gradient(135deg, #4CAF50 0%, #43A047 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+#btnAprobar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Botón Rechazar */
+#btnRechazar {
+  background: linear-gradient(135deg, #FF5252 0%, #D32F2F 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 82, 82, 0.3);
+}
+#btnRechazar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 82, 82, 0.4);
+}
+
+
+
