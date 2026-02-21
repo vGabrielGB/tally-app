@@ -31,6 +31,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/feedback/**").permitAll()
                 .requestMatchers("/api/usuarios/**").permitAll()
                 .requestMatchers("/api/pagos/**").permitAll()
+                .requestMatchers("/uploads/**").permitAll()
+
                 // El resto permitido
                 .anyRequest().permitAll()
             );

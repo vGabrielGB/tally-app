@@ -9,8 +9,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Esto le dice a Java: "Cuando alguien pida /uploads/**, busca en la carpeta física uploads/"
+        // para acceder a los archivos subidos
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:uploads/");
+            .addResourceLocations("file:uploads/");
     }
 }
