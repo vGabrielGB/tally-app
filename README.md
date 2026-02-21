@@ -15,9 +15,9 @@
 ### 📸 Interfaz de Usuario
 *(Aquí puedes ver cómo luce el sistema en acción)*
 
-| Login | Panel Principal | Gestión de Pagos |
+| Panel Principal Admin | Panel Principal Estudiante | Configuracion Admin |
 | :---: | :---: | :---: |
-| <img src="assets/login.png" width="250"/> | <img src="assets/dashboard.png" width="250"/> | <img src="assets/pagos.png" width="250"/> |
+| <img src="docs/dashboard_admin.png" width="250"/> | <img src="docs/dashboard_estudiante.png" width="250"/> | <img src="docs/config_admin.png" width="250"/> |
 
 ## ✨ Características Principales
 - **Arquitectura Basada en Roles:** Accesos y vistas dinámicas dependiendo del tipo de usuario (Dueño, Admin, Estudiante, Verificador).
@@ -29,9 +29,3 @@
 - **Backend:** Java, Spring Boot, Maven.
 - **Frontend:** HTML5, CSS3, JavaScript (Vanilla).
 - **Base de Datos:** MySQL (Estructura relacional gestionada vía Spring Data JPA / Hibernate).
-
-## 🚀 Instalación y Uso Local
-
-1. Clona este repositorio:
-   ```bash
-   git clone [https://github.com/vGabrielGB/tally-app.git](https://github.com/vGabrielGB/tally-app.git)
